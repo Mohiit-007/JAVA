@@ -30,40 +30,38 @@ package OOPS;
 // -- > we can also have static and private methods but these will not be inherited in implementing
 // classes
 
-interface Animal{
-    void show();
-    int x = 10;
-}
-
-interface WaterAnimal{
+interface Animal {
     void show();
 }
 
-interface Lion extends Animal , WaterAnimal{
+interface WaterAnimal {
+    void swim();
+}
+
+// Interface extending multiple interfaces
+interface Lion extends Animal, WaterAnimal {
     void display();
-    default void show(){
-        System.out.println("hello");
+}
+
+class Dog implements Animal {
+    public void show() {
+        System.out.println("Dog barking");
     }
 }
 
-class Dog implements Animal{
-    public void show(){
-        System.out.println("hello Doggy");
+class Crocs implements Animal, WaterAnimal {
+    public void show() {
+        System.out.println("Crocodile on land");
     }
-    public void display(){
-        System.out.println("hello Doggy , how are u ???");
+
+    public void swim() {
+        System.out.println("Crocodile swimming");
     }
 }
 
-class Crocs implements Animal , WaterAnimal {
-    public void show(){
-        System.out.println("hello Crocoo");
-    }
-}
-
-class fish extends Crocs implements WaterAnimal{
-    public void show(){
-        System.out.println("hello Crocoo");
+class Fish extends Crocs {
+    public void show() {
+        System.out.println("Fish in water");
     }
 }
 
@@ -71,8 +69,9 @@ public class Interface {
     public static void main(String[] args) {
         Animal a = new Dog();
         a.show();
-        Dog d = new Dog();
-        d.show();
-        d.display();
+
+        Crocs c = new Crocs();
+        c.show();
+        c.swim();
     }
 }
