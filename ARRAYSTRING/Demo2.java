@@ -12,8 +12,7 @@ public class Demo2 {
         }
         System.out.println();
 
-        
-        // Binary search
+         // Binary search
         int d = Arrays.binarySearch(a, 11);
         System.out.println(d);
     }

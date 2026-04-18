@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+public class StreamApi {
+    public static void main() {
+        List<Integer> l = new ArrayList<>();
+        List<Integer> nums = List.of(7,5,2,6,3,4,1,8);
+        ListIterator<Integer> it = nums.listIterator();
+        while(it.hasNext()){
+            int temp = it.next();
+            if(temp % 2 != 0){
+                l.add(temp);
+            }
+        }
+
+        System.out.println(l);
+        int sum = 0;
+        for(int num : l){
+            sum += num;
+        }
+        System.out.println(sum);
+
+        // streamApi only work on stream Objects || Stream API works on collections by converting them into streams
+        // Stream<Integer> stream = nums.stream().filter(x -> x > 2);
+        // filter,map,sort return stream we convert it into list by using .tolist();
+        List<Integer> list1 = nums.stream().filter(x -> x > 5).toList();
+        System.out.println(list1);
+
+        // filter :- it is used to for filteration in array like separate odd and even values from array it returns Stream Object
+        // map :- it is used to update the elements in the array it returns Stream Object
+        // reduce :- reduce is used for any aggregation (sum, product, max, etc.)
+        // sorted :- it is used for sorting it returns Stream Object
+        // Filtering → O(n)
+        // Mapping → O(n)
+        // Sorting → O(n log n)
+        // Reduce → O(n)
+
+        // distint() :- use to remove duplicates
+        // limit(3) :- print start 3 elements
+        // skip(3) :- to skip start 3 elements
+        // count :- no. of elements always return long
+
+        List<Integer> list2 = nums.stream().filter(x-> x%2 == 0).map(x -> x*2).sorted().distinct().toList();
+        // System.out.println(list2);
+        int a = list2.stream().reduce(0,(acc, curr)->acc + curr);
+        int b = list2.stream().reduce(0,(acc, curr)->acc - curr);
+        int c = list2.stream().reduce(1,(acc, curr)->acc * curr);
+        List<Integer> list3 = nums.stream().limit(3).toList(); // print start elements
+        List<Integer> list4 = nums.stream().skip(3).toList();
+        long count = nums.stream().filter(x -> x > 4).count();
+        System.out.println(list3);
+        System.out.println(list4);
+        System.out.println(count);
+        System.out.println(a);
+        list2.forEach(n -> System.out.print(n + " "));
+
+    }
+}
